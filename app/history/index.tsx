@@ -1,4 +1,6 @@
-import React, { useState, useCallback } from "react";
+"use client";
+
+import { useState, useCallback } from "react";
 import {
   View,
   Text,
@@ -15,8 +17,8 @@ import { useFocusEffect } from "@react-navigation/native";
 import {
   getDoseHistory,
   getMedications,
-  DoseHistory,
-  Medication,
+  type DoseHistory,
+  type Medication,
   clearAllData,
 } from "../../utils/storage";
 
@@ -55,7 +57,14 @@ export default function HistoryScreen() {
   );
 
   const groupHistoryByDate = () => {
-    const grouped = history.reduce((acc, dose) => {
+    const filtered = history.filter((dose) => {
+      if (selectedFilter === "all") return true;
+      if (selectedFilter === "taken") return dose.taken;
+      if (selectedFilter === "missed") return !dose.taken;
+      return true;
+    });
+
+    const grouped = filtered.reduce((acc, dose) => {
       const date = new Date(dose.timestamp).toDateString();
       if (!acc[date]) {
         acc[date] = [];
@@ -68,13 +77,6 @@ export default function HistoryScreen() {
       (a, b) => new Date(b[0]).getTime() - new Date(a[0]).getTime()
     );
   };
-
-  const filteredHistory = history.filter((dose) => {
-    if (selectedFilter === "all") return true;
-    if (selectedFilter === "taken") return dose.taken;
-    if (selectedFilter === "missed") return !dose.taken;
-    return true;
-  });
 
   const groupedHistory = groupHistoryByDate();
 
