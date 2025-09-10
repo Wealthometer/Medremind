@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   View,
   Text,
@@ -6,6 +6,8 @@ import {
   TouchableOpacity,
   Dimensions,
   Platform,
+  Animated,
+  Easing,
 } from "react-native";
 import { useRouter } from "expo-router";
 import * as LocalAuthentication from "expo-local-authentication";
@@ -24,6 +26,48 @@ export default function AuthScreen() {
     if (Platform.OS !== "web") {
       checkBiometrics();
     }
+  }, []);
+
+  const bounceAnim = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    Animated.loop(
+      Animated.sequence([
+        Animated.timing(bounceAnim, {
+          toValue: -15, // move up
+          duration: 500,
+          easing: Easing.inOut(Easing.ease),
+          useNativeDriver: true,
+        }),
+        Animated.timing(bounceAnim, {
+          toValue: 0, // back down
+          duration: 500,
+          easing: Easing.inOut(Easing.ease),
+          useNativeDriver: true,
+        }),
+      ])
+    ).start();
+  }, []);
+
+  const pulseAnim = useRef(new Animated.Value(1)).current; // start at normal size
+
+  useEffect(() => {
+    Animated.loop(
+      Animated.sequence([
+        Animated.timing(pulseAnim, {
+          toValue: 1.4, // grow
+          duration: 600,
+          easing: Easing.inOut(Easing.ease),
+          useNativeDriver: true,
+        }),
+        Animated.timing(pulseAnim, {
+          toValue: 1, // shrink back
+          duration: 600,
+          easing: Easing.inOut(Easing.ease),
+          useNativeDriver: true,
+        }),
+      ])
+    ).start();
   }, []);
 
   const checkBiometrics = async () => {
@@ -72,7 +116,9 @@ export default function AuthScreen() {
     <LinearGradient colors={["#4CAF50", "#2E7D32"]} style={styles.container}>
       <View style={styles.content}>
         <View style={styles.iconContainer}>
-          <Ionicons name="medical" size={80} color="white" />
+          <Animated.View style={{ transform: [{ scale: pulseAnim }] }}>
+            <Ionicons name="medical" size={80} color="white" />
+          </Animated.View>
         </View>
 
         <Text style={styles.title}>MedRemind</Text>
