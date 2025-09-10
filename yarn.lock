@@ -3379,12 +3379,24 @@ expo-keep-awake@~14.1.4:
   resolved "https://registry.yarnpkg.com/expo-keep-awake/-/expo-keep-awake-14.1.4.tgz#80197728563e0e17523e5a606fbd6fbed9639503"
   integrity sha512-wU9qOnosy4+U4z/o4h8W9PjPvcFMfZXrlUoKTMBW7F4pLqhkkP/5G4EviPZixv4XWFMjn1ExQ5rV6BX8GwJsWA==
 
+expo-linear-gradient@~14.1.5:
+  version "14.1.5"
+  resolved "https://registry.yarnpkg.com/expo-linear-gradient/-/expo-linear-gradient-14.1.5.tgz#414bf0c8145089087198d4dd5a419eb324af2a02"
+  integrity sha512-BSN3MkSGLZoHMduEnAgfhoj3xqcDWaoICgIr4cIYEx1GcHfKMhzA/O4mpZJ/WC27BP1rnAqoKfbclk1eA70ndQ==
+
 expo-linking@~7.1.7:
   version "7.1.7"
   resolved "https://registry.yarnpkg.com/expo-linking/-/expo-linking-7.1.7.tgz#8e41ef1ca5d1190dfc01b7f4dbc4c3993bdc4523"
   integrity sha512-ZJaH1RIch2G/M3hx2QJdlrKbYFUTOjVVW4g39hfxrE5bPX9xhZUYXqxqQtzMNl1ylAevw9JkgEfWbBWddbZ3UA==
   dependencies:
     expo-constants "~17.1.7"
+    invariant "^2.2.4"
+
+expo-local-authentication@~16.0.5:
+  version "16.0.5"
+  resolved "https://registry.yarnpkg.com/expo-local-authentication/-/expo-local-authentication-16.0.5.tgz#a058f735100678131ec37a8e55a828cd55954b3b"
+  integrity sha512-JzrUssLBB5tr06ffbZJC074fru2mw6He3ALtwlRnrmL7svMJS0zvm6e5Gx5CSxfHf1DgneBVBnyRlmtWxQzY9Q==
+  dependencies:
     invariant "^2.2.4"
 
 expo-modules-autolinking@2.1.14:
