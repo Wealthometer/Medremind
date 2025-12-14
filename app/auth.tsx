@@ -84,7 +84,7 @@ export default function AuthScreen() {
     }
 
     try {
-      setIsAuthenticating(true);
+      setIsAuthenticating(false);
       setError(null);
 
       const hasHardware = await LocalAuthentication.hasHardwareAsync();
